@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Menus refresh debug />
+    <Dropzone @drop="updateFilePath" paths-only single :accepts="['.ffx']" />
     <Panel>
       <brutalism-title title="" subtitle="BINARY CONVERTER" />
       <Wrapper>
@@ -9,7 +10,6 @@
           :value="filePath"
           @update="updatePath"
           prefs-id="input-path"
-          @prefs="kickstart"
         />
         <Input
           copy-content
@@ -35,6 +35,7 @@ import { evalScript } from "brutalism";
 export default {
   data: () => ({
     filePath: "",
+    realPath: "",
     readContent: "",
   }),
   components: {
@@ -42,11 +43,22 @@ export default {
     "brutalism-title": require("./components/brutalismTitle.vue").default,
   },
   methods: {
+    updateFilePath(data) {
+      this.filePath = data[0];
+    },
     async updatePath(val) {
-      this.filePath = val.path;
+      this.realPath = typeof val === "string" ? val : val.path;
+      let temp =
+        this.realPath && this.realPath.length
+          ? this.realPath.replace(/\\/gm, "/")
+          : "";
+      if (!temp.length) {
+        console.error("NO LENGTH?");
+        return false;
+      }
       let code = `(function() {
         var fileContent, binaryString;
-        var targPath = "${this.filePath.replace(/\\/gm, "/")}";
+        var targPath = "${temp.replace(/\\/gm, "/")}";
         //
         file = new File(targPath);
         file.encoding = "BINARY";
@@ -55,9 +67,13 @@ export default {
         file.close();
         //
         binaryString = fileContent.toSource();
-        binaryString = binaryString.replace(/^\\(new String\\(/, '');
-        binaryString = binaryString.replace(/\\)\\)$/, ';');
-        return binaryString;
+        if (binaryString && binaryString.length) {
+          binaryString = binaryString.replace(/^\\(new String\\(/, '');
+          binaryString = binaryString.replace(/\\)\\)$/, ';');
+          return binaryString;
+        } else {
+          return false;
+        }
       }())
       `;
       let result = await evalScript(code);
@@ -66,12 +82,3 @@ export default {
   },
 };
 </script>
-
-<style>
-input,
-textarea,
-select,
-button {
-  font-family: monospace;
-}
-</style>
