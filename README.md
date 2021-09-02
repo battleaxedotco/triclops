@@ -40,3 +40,31 @@ But a lot of fonts don't match this format. 🤔
 
 
 Sooooooo we need to manually create a substitution list based on available fonts and their Postscript names.
+
+
+#### Triclops JSON format
+```
+{
+    "Arial Black": {
+        "Regular": "Arial-Black"
+    },
+    "Arial Narrow": {
+        "Bold Italic": "ArialNarrow-BoldItalic",
+        "Bold": "ArialNarrow-Bold",
+        "Italic": "ArialNarrow-Italic",
+        "Regular": "ArialNarrow"
+    },
+    "Arial Rounded MT Bold": {
+        "Regular": "ArialRoundedMTBold"
+    },
+    "Arial": {
+        "Bold Italic": "Arial-BoldItalicMT",
+        "Bold": "Arial-BoldMT",
+        "Italic": "Arial-ItalicMT",
+        "Regular": "ArialMT"
+    },
+    "Arial Unicode MS": {
+        "Regular": "ArialUnicodeMS"
+    }
+}
+```
