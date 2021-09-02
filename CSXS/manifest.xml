@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<ExtensionManifest ExtensionBundleId="com.hel10" ExtensionBundleVersion="1.0.0" ExtensionBundleName="hel10" Version="8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ExtensionManifest ExtensionBundleId="com.triclops" ExtensionBundleVersion="1.0.0" ExtensionBundleName="triclops" Version="8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ExtensionList>
-    <Extension Id="com.hel10.panel" Version="1.0.0" />
+    <Extension Id="com.triclops.panel" Version="1.0.0" />
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -20,11 +20,11 @@
     </RequiredRuntimeList>
   </ExecutionEnvironment>
   <DispatchInfoList>
-    <Extension Id="com.hel10.panel">
+    <Extension Id="com.triclops.panel">
       <DispatchInfo>
         <Resources>
-          <MainPath>./dist/index.html</MainPath>
-          <!-- <MainPath>./public/index-dev.html</MainPath> -->
+          <MainPath>./public/index-dev.html</MainPath>
+          <!-- <MainPath>./dist/index.html</MainPath> -->
           <CEFCommandLine>
             <Parameter>--enable-nodejs</Parameter>
             <Parameter>--mixed-context</Parameter>
@@ -35,7 +35,7 @@
         </Lifecycle>
         <UI>
           <Type>Panel</Type>
-          <Menu>HEL10</Menu>
+          <Menu>Triclops</Menu>
           <Geometry>
             <Size>
               <Height>400</Height>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ExtensionList>
-    <Extension Id="com.hel10.panel">
+    <Extension Id="com.triclops.panel">
         <HostList>
             <Host Name="ILST" Port="9000" />
             <Host Name="AEFT" Port="9001" />
