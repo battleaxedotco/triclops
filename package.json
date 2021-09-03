@@ -1,5 +1,5 @@
 {
-  "name": "molotov",
+  "name": "triclops",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,8 @@
     "switch": "bombino-cmd switch",
     "update": "bombino-cmd update",
     "register": "bombino-cmd register",
-    "help": "bombino-cmd help"
+    "help": "bombino-cmd help",
+    "package": "bombino-cmd package"
   },
   "dependencies": {
     "brutalism": "^1.6.5",
@@ -27,7 +28,7 @@
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
     "babel-eslint": "^10.0.1",
-    "bombino-commands": "^1.0.1",
+    "bombino-commands": "^1.1.1",
     "boxen": "^4.1.0",
     "chalk": "^2.4.2",
     "eslint": "^5.16.0",

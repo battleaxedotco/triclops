@@ -16,9 +16,9 @@ fontName = {
 {
 ```
 
-This works for Figma, but Adobe apps need a Postscript name. For many modern fonts these 2 properties may be combined to create the matching Postscript name like this:
+This works for Figma, but Adobe apps need a Postscript name. Many modern fonts follow the convention of `FontName-FontStyle` for the Postscript name so AEUX may dynamically locate fonts like this:
 ```
-fontName.family.replaceAll(' ', '') + '-' + fontName.style.replaceAll(' ', '')
+`${fontName.family.replace(/ /g, '')}-${fontName.style.replace(/ /g, '')}`
 ```
 
 ```
@@ -31,18 +31,20 @@ Becomes:
 ```
 FiraMono-Regular
 ```
-Which is the Postscript name. Yay!
+Which is the correct Postscript name. Yay!
 
 But a lot of fonts don't match this format. 🤔
 - Arial Regular: `ArialMT`
 - Courier Regular: `Courier`
 - HelveticaNeue Regular: `HelveticaNeue`
+- Times New Roman Regular: `TimesNewRomanPSMT`
 
 
 Sooooooo we need to manually create a substitution list based on available fonts and their Postscript names.
 
 
 #### Triclops JSON format
+Dragging system fonts into the panel generates a list of fonts that do not match the `FontName-FontStyle` formatting. 
 ```
 {
     "Arial Black": {
@@ -54,17 +56,17 @@ Sooooooo we need to manually create a substitution list based on available fonts
         "Italic": "ArialNarrow-Italic",
         "Regular": "ArialNarrow"
     },
-    "Arial Rounded MT Bold": {
-        "Regular": "ArialRoundedMTBold"
-    },
     "Arial": {
         "Bold Italic": "Arial-BoldItalicMT",
         "Bold": "Arial-BoldMT",
         "Italic": "Arial-ItalicMT",
         "Regular": "ArialMT"
     },
-    "Arial Unicode MS": {
-        "Regular": "ArialUnicodeMS"
-    }
+    "Times New Roman": {
+        "Bold Italic": "TimesNewRomanPS-BoldItalicMT",
+        "Italic": "TimesNewRomanPS-ItalicMT",
+        "Bold": "TimesNewRomanPS-BoldMT",
+        "Regular": "TimesNewRomanPSMT"
+    },
 }
 ```

@@ -5,7 +5,7 @@
       @drop="readFiles" 
       auto-read multiple :accepts="['.ttf', '.ttc', '.dfont', '.otf']" />
     <Panel>
-      <brutalism-title title="" subtitle="Drop font files into this panel to get Postscript names" />
+      <brutalism-title title="" subtitle="Drop font files into this panel to get unique Postscript names" />
       <Wrapper>
         <progress
           id="file" 
@@ -76,7 +76,11 @@ export default {
           try {
             const fontMeta = FontName.parse(e.target.result)[0];
             console.log(fontMeta);
-            if (fontMeta.fontFamily.charAt(0) != '.') {
+            let familyName = fontMeta.fontFamily
+            let styleName = fontMeta.fontSubfamily
+
+            let concatName = `${familyName.replace(/ /g, '')}-${styleName.replace(/ /g, '')}`
+            if (fontMeta.postScriptName != concatName) {
 
               if (!this.fontInfo[fontMeta.fontFamily]) {
                 this.fontInfo[fontMeta.fontFamily] = {}
